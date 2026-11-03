@@ -6,7 +6,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Твоя база данных Neon
 const pool = new Pool({
   connectionString: 'postgresql://neondb_owner:npg_dopgS9aw0WUs@ep-long-cell-arvvjp4f-pooler.c-4.us-west-2.aws.neon.tech/neondb?sslmode=require',
   ssl: { rejectUnauthorized: false }
@@ -42,5 +41,7 @@ app.post('/leaderboard', async (req, res) => {
   }
 });
 
-// ЭКСПОРТ ДЛЯ VERCEL (вместо app.listen)
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Сервер запущен на порту ${PORT}`);
+});
